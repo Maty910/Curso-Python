@@ -17,7 +17,7 @@ while True:
   "5. Eliminar producto \n " \
   "6. Salir")
 
-  opcion = int(input(f"Ingrese una opción: "))
+  opcion = int(input(f" \n Ingrese una opción: "))
 
   # Procesamiento de la opción seleccionada
 
@@ -74,7 +74,8 @@ while True:
       for producto in lista_productos:
         nombre_prod, categoria_prod, precio_prod = producto
         print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
-        print(f"Detalles del último producto ingresado: {lista_productos[-1][0]}, ${lista_productos[-1][2]}, {lista_productos[-1][1]} \n \n")
+      
+      print(f"Detalles del último producto ingresado: {lista_productos[-1][0]}, ${lista_productos[-1][2]}, {lista_productos[-1][1]} \n ")
 
     case 3:
       print("Opción 3 seleccionada: Buscar producto")
@@ -93,19 +94,25 @@ while True:
     # Modificar producto existente
     case 4:
       print("Opción 4 ingresada: Modificar producto")
+      print("Seleccione el producto que desea modificar:")
+      if not lista_productos:
+        print("No hay productos ingresados para modificar.")
+        continue
+      for producto in lista_productos:
+        nombre_prod, categoria_prod, precio_prod = producto
+        print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
       modificar_prod = str(input("Ingrese el nombre del producto que desea modificar: "))
       encontrado = False
       for producto in lista_productos:
         nombre_prod, categoria_prod, precio_prod = producto
         if modificar_prod.lower() in producto[0].lower():
-          print(f"Producto encontrado: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
+          print(f"Producto encontrado: \n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
           encontrado = True
-          break
-        if encontrado == False:
+          continue
+        if not encontrado == False:
           print("Producto no encontrado, revise la información ingresada.")  
+          continue
 
-      # Aquí se podría implementar la lógica para modificar el producto
-      # # Por ejemplo, solicitar al usuario los nuevos datos del producto:
       print("Ingrese los nuevos datos del producto:")
       nombre_mod = str(input("Ingrese el nuevo nombre del producto: "))
       precio_mod = int(input("Ingrese el precio modificado del producto: ")) 
@@ -121,11 +128,25 @@ while True:
     # Eliminar producto existente
     case 5:
       print("Opción 5 ingresada: Seleccione que producto desea eliminar")
-      nombre_prod = input("ingrese el nombre del producto que desea eliminar: ")
-      if nombre_prod == nombre_prod:
-        print(f"Producto eliminado: {nombre_prod}")
+      
+      print("Seleccione el producto que desea eliminar:")
+      if not lista_productos:
+        print("No hay productos ingresados para eliminar.")
+        continue
+      for producto in lista_productos:
+        nombre_prod, categoria_prod, precio_prod = producto
+        print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
+
+      remove_prod = str(input("Ingrese el nombre del producto que desea eliminar: "))
+
+      if any(producto[0].lower() == remove_prod.lower() for producto in lista_productos):
+        lista_productos = [producto for producto in lista_productos if producto[0].lower() != remove_prod.lower()]
+        print(f"Producto '{remove_prod}' eliminado correctamente.")
       else:
         print("Producto no encontrado, revise la información ingresada")
+      continue
+
+    # Salir del programa
     case 6:
       print("Opción 6 seleccionada: Saliendo del programa")
       break
