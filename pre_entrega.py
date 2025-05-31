@@ -46,20 +46,20 @@ while True:
           continue
         else:
           break
-      print(f"El precio del producto {nombre_prod} ingresado es: ${precio_prod}")
+      print(f"El precio del producto {nombre_prod} ingresado es: ${precio_prod} \n")
 
       # Validación de la categoría del producto
       while True:
         categoria_prod = str(input("Ingrese la categoría del producto: ").strip())
         if categoria_prod == "":
-          print("La categoría del producto no puede estar vacía. Intente nuevamente.")
+          print("La categoría del producto no puede estar vacía. Intente nuevamente. \n")
           continue
         else:
           break
       print(f"La categoría del producto {nombre_prod} ingresada es: {categoria_prod}")
 
       # Agregar el producto a la lista de productos
-      print(f"Producto {nombre_prod} añadido correctamente a la lista de productos.")
+      print(f"\n Producto {nombre_prod} añadido correctamente a la lista de productos. \n")
 
       producto = [nombre_prod, categoria_prod, precio_prod]
       lista_productos.append(producto)
@@ -82,6 +82,15 @@ while True:
       buscar_prod = str(input("Ingrese el nombre del producto que desea buscar: ").strip())
       encontrado = False
 
+      if buscar_prod == "":
+        print("El nombre del producto no puede estar vacío. Intente nuevamente.")
+        continue
+      if not lista_productos:
+        print("No hay productos ingresados para buscar. Por favor, primero ingrese un producto.")
+        continue
+      print(f"\n Buscando producto... \n {buscar_prod} \n")
+      
+      # Buscar el producto en la lista
       for producto in lista_productos:
         nombre_prod, categoria_prod, precio_prod = producto
         if buscar_prod.lower() in producto[0].lower():
@@ -95,6 +104,13 @@ while True:
     case 4:
       print("Opción 4 ingresada: Modificar producto")
       print("Seleccione el producto que desea modificar:")
+      
+      if producto == "":
+        print("No hay productos ingresados para modificar.")
+        continue
+      if modificar_prod == "":
+        print("El nombre del producto no puede estar vacío. Intente nuevamente.")
+        continue
       if not lista_productos:
         print("No hay productos ingresados para modificar.")
         continue
@@ -103,12 +119,13 @@ while True:
         print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
       modificar_prod = str(input("Ingrese el nombre del producto que desea modificar: "))
       encontrado = False
+      
       for producto in lista_productos:
         nombre_prod, categoria_prod, precio_prod = producto
         if modificar_prod.lower() in producto[0].lower():
           print(f"Producto encontrado: \n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
           encontrado = True
-          continue
+          break
         if not encontrado == False:
           print("Producto no encontrado, revise la información ingresada.")  
           continue
@@ -122,7 +139,7 @@ while True:
       for i, producto in enumerate(lista_productos): 
         if producto[0].lower() == modificar_prod.lower():
           lista_productos[i] = [nombre_mod, categoria_mod, precio_mod]
-          print(f"Producto modificado: {nombre_mod} \n Precio: ${precio_mod} \n Categoría: {categoria_mod} \n")
+          print(f"\n Producto modificado: {nombre_mod} \n Precio: ${precio_mod} \n Categoría: {categoria_mod} \n")
           break
         
     # Eliminar producto existente
@@ -137,18 +154,19 @@ while True:
         nombre_prod, categoria_prod, precio_prod = producto
         print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
 
-      remove_prod = str(input("Ingrese el nombre del producto que desea eliminar: "))
+      remove_prod = str(input("Ingrese el nombre completo del producto que desea eliminar: "))
 
       if any(producto[0].lower() == remove_prod.lower() for producto in lista_productos):
         lista_productos = [producto for producto in lista_productos if producto[0].lower() != remove_prod.lower()]
-        print(f"Producto '{remove_prod}' eliminado correctamente.")
+        print(f"\n Producto '{remove_prod}' eliminado correctamente.\n ")
       else:
-        print("Producto no encontrado, revise la información ingresada")
+        print("\n Producto no encontrado, revise la información ingresada \n")
       continue
 
     # Salir del programa
     case 6:
-      print("Opción 6 seleccionada: Saliendo del programa")
+      print("Opción 6 seleccionada: Saliendo del programa.")
+      print("\n Gracias por utilizar el programa. ¡Nos vemos! \n Podés encontrar otros de mis trabajos en: https://github.com/Maty910 \n" )
       break
     case _:
-      print("Opción no válidad. Por favor, ingrese una opción válida.")
+      print("Opción no válida. Por favor, ingrese una opción válida.")
