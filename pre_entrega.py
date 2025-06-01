@@ -75,8 +75,6 @@ while True:
         nombre_prod, categoria_prod, precio_prod = producto
         print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
       
-      print(f"Detalles del último producto ingresado: {lista_productos[-1][0]}, ${lista_productos[-1][2]}, {lista_productos[-1][1]} \n ")
-
     case 3:
       print("Opción 3 seleccionada: Buscar producto")
       buscar_prod = str(input("Ingrese el nombre del producto que desea buscar: ").strip())
@@ -91,26 +89,20 @@ while True:
       print(f"\n Buscando producto... \n {buscar_prod} \n")
       
       # Buscar el producto en la lista
-      for producto in lista_productos:
-        nombre_prod, categoria_prod, precio_prod = producto
-        if buscar_prod.lower() in producto[0].lower():
-          print(f" \n Producto encontrado: \n Nombre: {producto[0]} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
-          encontrado = True
-          break
-      if encontrado == False:
-        print("Producto no encontrado, revise la información ingresada.")
+
+      print("Resultados de la búsqueda:")
+      coincidencias = [producto for producto in lista_productos if buscar_prod.lower() in producto[0].lower()]
+      if coincidencias:
+        for producto in coincidencias:
+          print(f"\n Nombre: {producto[0]} \n Precio: ${producto[2]} \n Categoría: {producto[1]} \n")
+      else:
+        print("No se encontraron productos con coincidencia en el nombre. \n")
     
     # Modificar producto existente
     case 4:
       print("Opción 4 ingresada: Modificar producto")
       print("Seleccione el producto que desea modificar:")
       
-      if producto == "":
-        print("No hay productos ingresados para modificar.")
-        continue
-      if modificar_prod == "":
-        print("El nombre del producto no puede estar vacío. Intente nuevamente.")
-        continue
       if not lista_productos:
         print("No hay productos ingresados para modificar.")
         continue
@@ -150,6 +142,7 @@ while True:
       if not lista_productos:
         print("No hay productos ingresados para eliminar.")
         continue
+      
       for producto in lista_productos:
         nombre_prod, categoria_prod, precio_prod = producto
         print(f"\n Nombre: {nombre_prod} \n Precio: ${precio_prod} \n Categoría: {categoria_prod} \n")
